@@ -1,0 +1,41 @@
+# Copyright 2016 Google Inc. All rights reserved.
+
+
+resources:
+- type: storage.v1.bucket
+  name: test-bucket123321123123
+  properties:
+    project: newtest1777
+    name: test-bucket-name
+  accessControl:
+    gcpIamPolicy: 
+      bindings:
+      - role: roles/storage.admin
+        members:
+        - "user:nnishu.jjain@gmail.com"
+      - role: roles/storage.objectViewer
+        members:
+        - "user:sgripjawz@gmail.com"
+        
+- name: new-pubsub-testiam
+  type: pubsub.v1.topic 
+  properties:
+    topic: new-pubsub-testiam
+  accessControl:
+    gcpIamPolicy: 
+      bindings:
+      - role: roles/pubsub.editor
+        members:
+        - "user:nnishu.jjain@gmail.com"
+      - role: roles/pubsub.publisher
+        members:
+        - "user:sgripjawz@gmail.com"
+
+
+ #$(ref.a-new-network.selfLink)       
+#- name: a-new-network
+#  type: compute.v1.network
+#  properties:
+#    IPv4Range: 10.0.0.1/16
+
+

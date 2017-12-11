@@ -1,0 +1,89 @@
+# Copyright 2016 Google Inc. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+resources:
+- name: the-first-vm1
+  type: compute.v1.instance
+  properties:
+    zone: us-central1-f
+    machineType: https://www.googleapis.com/compute/v1/projects/newtest1777/zones/us-central1-f/machineTypes/f1-micro
+    disks:
+    - deviceName: boot
+      type: PERSISTENT
+      boot: true
+      autoDelete: true
+      initializeParams:
+        sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/family/debian-8
+    networkInterfaces:
+    - network: https://www.googleapis.com/compute/v1/projects/newtest1777/global/networks/default 
+      accessConfigs:
+      - name: External NAT
+        type: ONE_TO_ONE_NAT
+#  accessControl:
+#    gcpIamPolicy:
+#      bindings:
+#      - role: roles/compute.viewer
+#        members:
+#        - "nnishu.jjain@gmail.com"
+
+- name: the-second-vm1
+  type: compute.v1.instance
+  properties:
+    zone: us-central1-f
+    machineType: https://www.googleapis.com/compute/v1/projects/newtest1777/zones/us-central1-f/machineTypes/g1-small
+    disks:
+    - deviceName: boot
+      type: PERSISTENT
+      boot: true
+      autoDelete: true
+      initializeParams:
+        sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/family/debian-8
+    networkInterfaces:
+    - network: https://www.googleapis.com/compute/v1/projects/newtest1777/global/networks/default 
+      accessConfigs:
+      - name: External NAT
+        type: ONE_TO_ONE_NAT
+#  accessControl:
+#    gcpIamPolicy:
+#      bindings:
+#      - role: roles/compute.viewer
+#        members:
+#        - "nnishu.jjain@gmail.com"
+#     - role: roles/compute.instanceAdmin.v1
+#        members:
+#        - "sanchit.gaur@maplequad.com"
+
+
+            
+- name: a-new-pubsub-topic
+  type: pubsub.v1.topic
+  properties:
+    topic: "Newtopic123321"
+  accessControl:
+    gcpIamPolicy: 
+      bindings:
+      - role: roles/pubsub.editor
+        members:
+        - "nnishu.jjain@gmail.com"
+      - role: roles/pubsub.publisher
+        members:
+        - "sanchit.gaur@maplequad.com"
+
+ #$(ref.a-new-network.selfLink)       
+#- name: a-new-network
+#  type: compute.v1.network
+#  properties:
+#    IPv4Range: 10.0.0.1/16
+
+

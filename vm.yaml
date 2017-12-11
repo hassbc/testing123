@@ -1,0 +1,29 @@
+resources:
+- type: compute.v1.instance
+  name: vm-test-iam-dm
+  properties:
+    zone: us-central1-f
+    machineType: https://www.googleapis.com/compute/v1/projects/newtest1777/zones/us-central1-f/machineTypes/f1-micro
+    disks:
+    - deviceName: boot
+      type: PERSISTENT
+      boot: true
+      autoDelete: true
+      initializeParams:
+        sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/debian-8-jessie-v20160301
+    networkInterfaces:
+    - network: https://www.googleapis.com/compute/v1/projects/newtest1777/global/networks/default
+      # Access Config required to give the instance a public IP address
+      accessConfigs:
+      - name: External NAT
+        type: ONE_TO_ONE_NAT        
+  accessControl:
+    gcpIamPolicy:
+      bindings:
+      - role: roles/compute.instanceAdmin.v1
+        members:
+        - "nnishu.jjain@gmail.com"
+        - "sgripjawz@gmail.com"
+
+
+
